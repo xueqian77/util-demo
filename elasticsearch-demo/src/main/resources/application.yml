@@ -1,0 +1,9 @@
+server:
+  port: 1002
+spring:
+  data:
+    elasticsearch:
+      cluster-name: node
+      cluster-nodes: 192.168.11.181:9300
+      repositories:
+        enabled: true

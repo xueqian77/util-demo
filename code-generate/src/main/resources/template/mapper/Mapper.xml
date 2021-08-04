@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package_mapper}.${Table}Mapper">
+    <resultMap id="${Table}ResultMap" type="${package_pojo}.${Table}">
+        <#list models as model>
+        <#if model.id==true>
+        <id column="${model.column}"
+            jdbcType="<#if model.simpleType=='Long'>BIGINT</#if><#if model.simpleType=='String'>VARCHAR</#if><#if model.simpleType=='Integer'>INTEGER</#if><#if model.simpleType=='Date'>TIMESTAMP</#if>"
+            property="${model.name}"/>
+    </#if>
+    <#if model.id==false>
+    <result column="${model.column}"
+            jdbcType="<#if model.simpleType=='Long'>BIGINT</#if><#if model.simpleType=='String'>VARCHAR</#if><#if model.simpleType=='Integer'>INTEGER</#if><#if model.simpleType=='Date'>TIMESTAMP</#if>"
+            property="${model.name}"/>
+</#if>
+        </#list>
+        </resultMap>
+
+<resultMap id="${Table}DetailResultMap" type="${package_pojo}.${Table}" extends="${Table}ResultMap">
+</resultMap>
+
+
+<sql id="${Table}Fields">
+<#list models as model> ${TableName}.${model.column},
+</#list>
+        </sql>
+
+<sql id="${Table}_Where_Clause">
+<where>
+    1=1
+    <#list models as model>
+    <if test="${model.name}!=null and ${model.name}!='' "><#if model.simpleType=='Long'> AND
+        ${TableName}.${model.column} = ${model.mysqlName}
+    </#if>
+    <#if model.simpleType=='Integer'> AND ${TableName}.${model.column} = ${model.mysqlName}
+</#if>
+<#if model.simpleType=='String'>AND ${TableName}.${model.column} like CONCAT("%",${model.mysqlName},"%")
+</
+        #if><#if model.simpleType=='Date'>AND DATE_FORMAT(  ${TableName}.${model.column}, '%Y-%m-%d' ) = ${model.mysqlName}</#if></if>
+        </#list>
+        </where>
+        </sql>
+
+
+<select id="select${Table}ByExample" parameterType="java.util.HashMap" resultMap="${Table}ResultMap">
+SELECT
+<include refid="${Table}Fields"/>
+FROM ${TableName}
+<include refid="${Table}_Where_Clause"/>
+</select>
+        </mapper>
