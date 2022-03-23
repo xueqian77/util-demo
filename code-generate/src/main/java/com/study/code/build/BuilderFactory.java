@@ -23,7 +23,7 @@ public class BuilderFactory {
                                String suffix) {      //生成文件后缀名字
         try {
             //获取模板对象
-            Template template = TemplateUtil.loadTemplate(ControllerBuilder.class.getResource(templatePath).getPath(), templateFile);
+            Template template = TemplateUtil.loadTemplate(BuilderFactory.class.getResource(templatePath).getPath(), templateFile);
 
             //创建文件夹
             String path = TemplateBuilder.PROJECT_PATH + storePath.replace(".", "/");

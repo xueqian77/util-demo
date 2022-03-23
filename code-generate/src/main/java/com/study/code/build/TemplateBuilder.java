@@ -101,7 +101,7 @@ public class TemplateBuilder {
                     //获取表名
                     String tableName = tableResultSet.getString("TABLE_NAME");
                     //名字操作,去掉tab_,tb_，去掉_并转驼峰
-                    String table = StringUtils.replace_(StringUtils.replaceTab(tableName));
+                    String table = StringUtils.replace_(tableName);
                     //大写对象
                     String Table = StringUtils.firstUpper(table);
 
@@ -157,23 +157,11 @@ public class TemplateBuilder {
                     //创建JavaBean
                     PojoBuilder.builder(modelMap);
 
-                    //创建Controller
-                    ControllerBuilder.builder(modelMap);
-
                     //创建Dao
                     DaoBuilder.builder(modelMap);
 
                     //创建Mapper
                     MapperBuilder.builder(modelMap);
-
-                    //创建Service接口
-                    ServiceBuilder.builder(modelMap);
-
-                    //创建ServiceImpl实现类
-                    ServiceImplBuilder.builder(modelMap);
-
-                    //创建Feign
-                    FeignBuilder.builder(modelMap);
 
                     //添加swagger路径映射
                     String format = "string";
