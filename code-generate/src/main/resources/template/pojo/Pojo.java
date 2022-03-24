@@ -40,4 +40,7 @@ public class ${Table} implements Serializable{
 
     </#list>
 
+    <#list models as model>
+    public static final String ${model.uppercaseColumn} = "${model.name}";
+    </#list>
 }

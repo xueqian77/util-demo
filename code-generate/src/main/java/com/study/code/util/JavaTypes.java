@@ -14,6 +14,8 @@ public class JavaTypes {
      */
     public static String getType(int value) {
         switch (value) {
+            case -7:
+                return "java.lang.Integer";
             case -6:
                 return "java.lang.Integer";
             case 5:

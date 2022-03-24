@@ -21,12 +21,23 @@ public class ModelInfo {
     private Boolean id;
     //列名
     private String column;
+    //大写列名
+    private String uppercaseColumn;
     //mysql字段
     private String mysqlName;
     //是否自增  YES自增，NO：非自增
     private String identity;
 
-    public ModelInfo(String type, String simpleType, String name, String upperName, String desc, Boolean id, String column, String identity, String mysqlName) {
+    public ModelInfo(String type,
+                     String simpleType,
+                     String name,
+                     String upperName,
+                     String desc,
+                     Boolean id,
+                     String column,
+                     String identity,
+                     String mysqlName,
+                     String uppercaseColumn) {
         this.type = type;
         this.simpleType = simpleType;
         this.name = name;
@@ -36,6 +47,7 @@ public class ModelInfo {
         this.column = column;
         this.identity = identity;
         this.mysqlName = mysqlName;
+        this.uppercaseColumn = uppercaseColumn;
     }
 
     public String getType() {
@@ -108,5 +120,13 @@ public class ModelInfo {
 
     public void setIdentity(String identity) {
         this.identity = identity;
+    }
+
+    public String getUppercaseColumn() {
+        return uppercaseColumn;
+    }
+
+    public void setUppercaseColumn(String uppercaseColumn) {
+        this.uppercaseColumn = uppercaseColumn;
     }
 }

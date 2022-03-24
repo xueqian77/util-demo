@@ -104,7 +104,6 @@ public class TemplateBuilder {
                     String table = StringUtils.replace_(tableName);
                     //大写对象
                     String Table = StringUtils.firstUpper(table);
-
                     //需要生成的Pojo属性集合
                     List<ModelInfo> models = new ArrayList<ModelInfo>();
                     //所有需要导包的类型
@@ -130,7 +129,16 @@ public class TemplateBuilder {
                         //获取类型，并转成JavaType
                         String javaType = JavaTypes.getType(cloumnsSet.getInt("DATA_TYPE"));
                         //创建该列的信息
-                        models.add(new ModelInfo(javaType, JavaTypes.simpleName(javaType), propertyName, StringUtils.firstUpper(propertyName), remarks, key.equals(columnName), columnName, cloumnsSet.getString("IS_AUTOINCREMENT"), "#{" + propertyName + "}"));
+                        models.add(new ModelInfo(javaType,
+                                JavaTypes.simpleName(javaType),
+                                propertyName,
+                                StringUtils.firstUpper(propertyName),
+                                remarks,
+                                key.equals(columnName),
+                                columnName,
+                                cloumnsSet.getString("IS_AUTOINCREMENT"),
+                                "#{" + propertyName + "}",
+                                columnName.toUpperCase()));
                         //需要导包的类型
                         typeSet.add(javaType);
                         //主键类型
